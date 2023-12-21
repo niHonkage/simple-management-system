@@ -32,5 +32,13 @@ module.exports = {
         changeOrigin: true // 是否跨域
       }
     }
+  },
+  configureWebpack: {
+    resolve: {
+      fallback: {
+        path: require.resolve('path-browserify')
+        // 其他需要的核心模块
+      }
+    }
   }
 }

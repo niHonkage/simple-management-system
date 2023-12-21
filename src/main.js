@@ -5,6 +5,7 @@ import store from './store'
 import installElementPlus from './plugins/element'
 import '@/style/main.scss'
 import installIcons from '@/icons/index.js'
+import './permission.js'
 
 const app = createApp(App)
 installElementPlus(app)

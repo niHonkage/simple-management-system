@@ -2,11 +2,10 @@
 import NavBar from './components/NavBar.vue'
 import SideBar from './components/SideBar.vue'
 import AppMain from './components/AppMain.vue'
-import variables from '@/style/variables.scss'
-console.log(variables)
+import variables from '@/style/variables.module.scss'
 </script>
 <template>
-  <div class="app-wrapper">
+  <div class="app-wrapper" :class="[$store.getters.sidebarOpened ? 'openSidebar' : 'hideSidebar']">
     <!-- 左侧menu -->
     <side-bar id="guide-sidebar" class="sidebar-container" :style="{backgroundColor: variables.menuBg}"></side-bar>
     <div class="main-container">
@@ -20,7 +19,7 @@ console.log(variables)
 </template>
 <style lang="scss" scoped>
 @import '~@/style/mixin.scss';
-@import '~@/style/variables.scss';
+@import '~@/style/variables.module.scss';
 
 .app-wrapper{
   @include clearfix;
@@ -33,6 +32,11 @@ console.log(variables)
   position: fixed;
   top: 0;
   right: 0;
-  width: calc(100% - #{sideBarWidth});
+  width: calc(100% - #{$sideBarWidth});
+  z-index: 10;
+}
+.hideSidebar .fixed-header {
+  width: calc(100% - #{$hideSideBarWidth});
+  transition: width #{sideBarDuration};
 }
 </style>

@@ -1,15 +1,31 @@
 import axios from 'axios'
 import { ElMessage } from 'element-plus'
+import store from '@/store/index.js'
+import { isCheckTimeout } from './auth'
 
 const service = axios.create({
   baseURL: process.env.VUE_APP_BASE_API,
   timeout: 5000
 })
 
-service.interceptors.request.use((config) => {
-  config.headers.icode = 'helloqianduanxunlianying'
-  return config
-})
+service.interceptors.request.use(
+  (config) => {
+    config.headers.icode = 'helloqianduanxunlianying'
+    if (store.getters.token) {
+      if (isCheckTimeout()) {
+        // 退出操作
+        console.log('退出')
+        store.dispatch('user/logout')
+        return Promise.reject(new Error('token 失效'))
+      }
+      config.headers.Authorization = `Bearer ${store.getters.token}`
+    }
+    return config
+  },
+  (error) => {
+    return Promise.reject(error)
+  }
+)
 
 service.interceptors.response.use(
   (response) => {
@@ -26,7 +42,14 @@ service.interceptors.response.use(
   },
   (error) => {
     // 超出 2XX 范围的状态码都会在这里处理
-    // TODO: 将来处理 token 超时问题
+    // token过期 要满足三个条件
+    if (
+      error.response &&
+      error.response.data &&
+      error.response.data.code === 401
+    ) {
+      store.dispatch('user/logout')
+    }
     ElMessage.error(error.message)
     return Promise.reject(error)
   }

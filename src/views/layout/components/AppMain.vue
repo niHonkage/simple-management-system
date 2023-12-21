@@ -2,7 +2,7 @@
 </script>
 <template>
   <div class="main">
-    内容区域
+    <router-view></router-view>
   </div>
 </template>
 <style lang="scss" scoped>
