@@ -1,6 +1,6 @@
 import { createI18n } from 'vue-i18n'
-import mZhLocale from './lang/zh'
-import mEnLocale from './lang/en'
+import mZhLocale from './lang/zh.js'
+import mEnLocale from './lang/en.js'
 import store from '@/store'
 
 // 获取浏览器界面语言，默认语言

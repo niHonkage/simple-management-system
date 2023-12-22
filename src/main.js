@@ -6,7 +6,7 @@ import installElementPlus from './plugins/element'
 import '@/style/main.scss'
 import installIcons from '@/icons/index.js'
 import './permission.js'
-import i18n from './i18n'
+import i18n from './i18n/index.js'
 
 const app = createApp(App)
 installElementPlus(app)

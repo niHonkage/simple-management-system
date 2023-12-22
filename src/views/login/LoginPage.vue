@@ -12,6 +12,7 @@ const loginForm = ref({
 })
 
 const i18n = useI18n()
+console.log(i18n.t('msg'))
 const rules = {
   username: [
     { required: true, message: i18n.t('msg.login.usernameRule1'), trigger: 'blur' },
@@ -56,21 +57,21 @@ const onLogin = () => {
           <lang-select class="lang-select"></lang-select>
         </el-form-item>
         <el-form-item prop="username">
-          <el-input placeholder="$t(msg.login.usernameRule1)" v-model="loginForm.username">
+          <el-input placeholder="$t('msg.login.usernameRule1')" v-model="loginForm.username">
             <template #prefix>
               <el-icon class="el-input__icon"><User /></el-icon>
             </template>
           </el-input>
         </el-form-item>
         <el-form-item prop="password">
-          <el-input placeholder="$t(msg.login.passwordRule1)" show-password type="password" v-model="loginForm.password">
+          <el-input placeholder="$t('msg.login.passwordRule1')" show-password type="password" v-model="loginForm.password">
             <template #prefix>
               <el-icon class="el-input__icon"><Lock /></el-icon>
             </template>
           </el-input>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" style="width: 100%;margin-top: 30px;" @click="onLogin" :loading="loading">{{$t(msg.login.loginBtn)}}</el-button>
+          <el-button type="primary" style="width: 100%;margin-top: 30px;" @click="onLogin" :loading="loading">{{ $t('msg.login.loginBtn') }}</el-button>
         </el-form-item>
       </el-form>
     </el-col>

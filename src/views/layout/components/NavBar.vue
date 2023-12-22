@@ -24,12 +24,12 @@ const logout = () => {
         </div>
         <template #dropdown>
             <router-link to="/">
-              <el-dropdown-item>{{$t('msg.navBar.home')}}</el-dropdown-item>
+              <el-dropdown-item>{{ $t('msg.navBar.home') }}</el-dropdown-item>
             </router-link>
             <a target="_blank" href="#">
-              <el-dropdown-item>{{$t('msg.navBar.course')}}</el-dropdown-item>
+              <el-dropdown-item>{{ $t('msg.navBar.course') }}</el-dropdown-item>
             </a>
-            <el-dropdown-item divided @click="logout">{{$t('msg.navBar.logout')}}</el-dropdown-item>
+            <el-dropdown-item divided @click="logout">{{ $t('msg.navBar.logout') }}</el-dropdown-item>
         </template>
       </el-dropdown>
     </div>
