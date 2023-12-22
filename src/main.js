@@ -6,8 +6,9 @@ import installElementPlus from './plugins/element'
 import '@/style/main.scss'
 import installIcons from '@/icons/index.js'
 import './permission.js'
+import i18n from './i18n'
 
 const app = createApp(App)
 installElementPlus(app)
 installIcons(app)
-app.use(store).use(router).mount('#app')
+app.use(store).use(router).use(i18n).mount('#app')

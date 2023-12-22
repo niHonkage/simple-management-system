@@ -3,6 +3,7 @@ import { ArrowRight } from '@element-plus/icons-vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useStore } from 'vuex'
 import { ref, watch } from 'vue'
+import { generateTitle } from '@/utils/i18n'
 
 const breadcrumbData = ref([])
 const route = useRoute()
@@ -11,7 +12,6 @@ const getBreadcrumbData = () => {
   breadcrumbData.value = route.matched.filter((item) => {
     return item.meta && item.meta.title 
   })
-  console.log(breadcrumbData.value)
 }
 
 // 监听路由变化调用更新数据
@@ -38,8 +38,8 @@ const linkHoverColor = ref(store.getters.cssVar.menuBg)
   <el-breadcrumb class="breadcrumb" :separator-icon="ArrowRight">
     <transition-group name="breadcrumb">
       <el-breadcrumb-item v-for="(item, index) in breadcrumbData" :key="item.path">
-        <span v-if="index === breadcrumbData.length - 1" class="no-redirect">{{ item.meta.title }}</span>
-        <a v-else class="redirect" @click.prevent="onLinkClick(item)">{{ item.meta.title }}</a>
+        <span v-if="index === breadcrumbData.length - 1" class="no-redirect">{{ generateTitle(item.meta.title) }}</span>
+        <a v-else class="redirect" @click.prevent="onLinkClick(item)">{{ generateTitle(item.meta.title) }}</a>
       </el-breadcrumb-item>
     </transition-group>
   </el-breadcrumb>

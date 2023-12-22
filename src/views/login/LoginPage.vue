@@ -3,29 +3,33 @@ import { User, Lock } from '@element-plus/icons-vue'
 import { ref } from 'vue'
 import { useStore } from 'vuex'
 import { ElMessage } from 'element-plus'
+import { useI18n } from 'vue-i18n'
+import LangSelect from '@/components/LangSelect.vue'
 
 const loginForm = ref({
   username: '',
   password: ''
 })
 
+const i18n = useI18n()
 const rules = {
   username: [
-    { required: true, message: '请输入用户名', trigger: 'blur' },
-    { min: 4, max: 15, message: '用户名是4~15位的字符', trigger: 'blur' }
+    { required: true, message: i18n.t('msg.login.usernameRule1'), trigger: 'blur' },
+    { min: 4, max: 15, message: i18n.t('msg.login.usernameRule2'), trigger: 'blur' }
   ],
   password: [
-    { required: true, message: '请输入密码', trigger: 'blur' },
-    { min: 6, max: 15, message: '密码是6~15位的字符', trigger: 'blur' }
+    { required: true, message: i18n.t('msg.login.passwordRule1'), trigger: 'blur' },
+    { min: 6, max: 15, message: i18n.t('msg.login.passwordRule2'), trigger: 'blur' }
   ]
 }
 const loading = ref(false)
 const formRef = ref(null)
 const store = useStore()
+
 const onLogin = () => {
   formRef.value.validate((valid) => {
     if (!valid) {
-      ElMessage.error('请检查表单信息是否正确')
+      ElMessage.error(i18n.t('msg.login.isCheckOut'))
       return
     }
     loading.value = true
@@ -48,24 +52,25 @@ const onLogin = () => {
     <el-col :span="6" :offset="3" class="form-container">
        <el-form class="form" :model="loginForm" :rules="rules" ref="formRef">
         <el-form-item class="title-container">
-          <h3 class="title">用户登录</h3>
+          <h3 class="title">{{ $t('msg.login.title') }}</h3>
+          <lang-select class="lang-select"></lang-select>
         </el-form-item>
         <el-form-item prop="username">
-          <el-input placeholder="请输入用户名" v-model="loginForm.username">
+          <el-input placeholder="$t(msg.login.usernameRule1)" v-model="loginForm.username">
             <template #prefix>
               <el-icon class="el-input__icon"><User /></el-icon>
             </template>
           </el-input>
         </el-form-item>
         <el-form-item prop="password">
-          <el-input placeholder="请输入密码" show-password type="password" v-model="loginForm.password">
+          <el-input placeholder="$t(msg.login.passwordRule1)" show-password type="password" v-model="loginForm.password">
             <template #prefix>
               <el-icon class="el-input__icon"><Lock /></el-icon>
             </template>
           </el-input>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" style="width: 100%;margin-top: 30px;" @click="onLogin" :loading="loading">登录</el-button>
+          <el-button type="primary" style="width: 100%;margin-top: 30px;" @click="onLogin" :loading="loading">{{$t(msg.login.loginBtn)}}</el-button>
         </el-form-item>
       </el-form>
     </el-col>
@@ -79,12 +84,26 @@ const onLogin = () => {
   background-size: cover;
   background-position: center;
 }
-.title{
-  text-align: center;
-  margin-bottom: 28px;
-  font-size: 32px;
-  color: #eee;
+.title-container{
+  position: relative;
+  .title{
+    text-align: center;
+    margin-bottom: 28px;
+    font-size: 32px;
+    color: #eee;
+  }
+  ::v-deep .lang-select{
+    position: absolute;
+    top: 4px;
+    right: 0;
+    background-color: #fff;
+    font-size: 22px;
+    padding: 4px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
 }
+
 .login-page{
   height: 100vh;
   width: 100vw;

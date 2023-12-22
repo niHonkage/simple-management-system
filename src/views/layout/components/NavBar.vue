@@ -3,6 +3,7 @@ import { Tools } from '@element-plus/icons-vue'
 import { useStore } from 'vuex'
 import ToggleButton from './ToggleButton.vue'
 import BreadCrumb from '@/components/BreadCrumb.vue'
+import LangSelect from '@/components/LangSelect.vue'
 
 const store = useStore()
 const logout = () => {
@@ -14,6 +15,7 @@ const logout = () => {
     <toggle-button class="hamburger-container" />
     <bread-crumb class="bread-crumb"></bread-crumb>
     <div class="right-menu">
+      <lang-select class="right-menu-item hover-effect"></lang-select>
       <!-- 头像 -->
       <el-dropdown class="avatar-container" trigger="click">
         <div class="avatar-wrapper">
@@ -22,12 +24,12 @@ const logout = () => {
         </div>
         <template #dropdown>
             <router-link to="/">
-              <el-dropdown-item>主页</el-dropdown-item>
+              <el-dropdown-item>{{$t('msg.navBar.home')}}</el-dropdown-item>
             </router-link>
             <a target="_blank" href="#">
-              <el-dropdown-item>课程主页</el-dropdown-item>
+              <el-dropdown-item>{{$t('msg.navBar.course')}}</el-dropdown-item>
             </a>
-            <el-dropdown-item divided @click="logout">退出登录</el-dropdown-item>
+            <el-dropdown-item divided @click="logout">{{$t('msg.navBar.logout')}}</el-dropdown-item>
         </template>
       </el-dropdown>
     </div>
@@ -71,6 +73,16 @@ const logout = () => {
           --el-avatar-background-color: none;
           margin-right: 12px;
         }
+      }
+    }
+    ::v-deep .right-menu-item {
+      display: inline-block;
+      padding: 0 18px 0 0;
+      font-size: 24px;
+      color: #5a5e66;
+      vertical-align: text-bottom;
+      &.hover-effect{
+        cursor: pointer;
       }
     }
   }

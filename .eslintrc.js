@@ -29,6 +29,7 @@ module.exports = {
     quotes: 'off', // 修改不校验
     'space-before-function-paren': 'off',
     'multi-word-component-names': 'off',
-    'no-trailing-spaces': 'off'
+    'no-trailing-spaces': 'off',
+    'prefer-const': 'off'
   }
 }
