@@ -9,9 +9,14 @@ import { useStore } from 'vuex'
 import { computed } from 'vue'
 import zhCn from 'element-plus/dist/locale/zh-cn.mjs'
 import en from 'element-plus/dist/locale/en.mjs'
+import { generateNewStyle, writeNewStyle } from './utils/theme.js'
+
+// 作用是刷新后立即根据存储的主色执行一遍更改样式
 const store = useStore()
 const lang = store.getters.language
-
 const locale = computed(() => lang === 'en' ? en : zhCn) 
+
+generateNewStyle(store.getters.mainColor)
+  .then((newStyle) => writeNewStyle(newStyle))
 
 </script>

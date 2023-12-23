@@ -30,10 +30,10 @@ const logoHeight = 44
        imooc-admin
       </h1>
     </div>
-    <el-scroolbar>
+    <el-scroolbar >
       <!-- 一级 menu 菜单 -->
       <el-menu
-      :background-color="$store.getters.cssVar.menuBg"
+      :style="{ backgroundColor: $store.getters.cssVar.menuBg }"
       :text-color="$store.getters.cssVar.menuText"
       :active-text-color="$store.getters.cssVar.menuActiveText"
       :unique-opened="true"
@@ -46,6 +46,7 @@ const logoHeight = 44
           v-for="item in routes"
           :key="item.path"
           :route="item"
+          :style="{ backgroundColor: $store.getters.cssVar.menuBg }"
         ></sidebar-item>
       </el-menu>
     </el-scroolbar>

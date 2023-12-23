@@ -2,12 +2,11 @@
 import NavBar from './components/NavBar.vue'
 import SideBar from './components/SideBar.vue'
 import AppMain from './components/AppMain.vue'
-import variables from '@/style/variables.module.scss'
 </script>
 <template>
   <div class="app-wrapper" :class="[$store.getters.sidebarOpened ? 'openSidebar' : 'hideSidebar']">
     <!-- 左侧menu -->
-    <side-bar id="guide-sidebar" class="sidebar-container" :style="{backgroundColor: variables.menuBg}"></side-bar>
+    <side-bar :style="{ backgroundColor: $store.getters.cssVar.menuBg }" id="guide-sidebar" class="sidebar-container"></side-bar>
     <div class="main-container">
       <div class="fixed-header">
         <!-- 顶部的 navbar -->

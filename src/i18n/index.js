@@ -11,7 +11,7 @@ if (locale) {
   currentLanguage = locale
 }
 
-const message = {
+const messages = {
   en: {
     msg: {
       ...mEnLocale
@@ -29,7 +29,7 @@ const i18n = createI18n({
   legacy: false,
   // 全局注入 $t 函数
   globalInjection: true,
-  message,
+  messages,
   locale: currentLanguage
 })
 

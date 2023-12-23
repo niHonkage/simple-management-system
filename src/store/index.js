@@ -1,7 +1,10 @@
 import { createStore } from 'vuex'
 import user from './modules/user.js'
 import app from './modules/app.js'
-import variables from '@/style/variables.module.scss'
+import theme from './modules/theme.js'
+import { generateColors } from '@/utils/theme.js'
+import { getItem } from '@/utils/storage.js'
+import { MAIN_COLOR } from '@/constant/index.js'
 
 export default createStore({
   state: {},
@@ -9,14 +12,21 @@ export default createStore({
     token: (state) => state.user.token,
     userInfo: (state) => state.user.userInfo,
     hasUserInfo: (state) => JSON.stringify(state.user.userInfo) !== '{}',
-    cssVar: (state) => variables,
+    cssVar: (state) => {
+      return {
+        ...state.theme.variables,
+        ...generateColors(getItem(MAIN_COLOR))
+      }
+    },
     sidebarOpened: (state) => state.app.sidebarOpened,
-    language: (state) => state.app.language
+    language: (state) => state.app.language,
+    mainColor: (state) => state.theme.mainColor
   },
   mutations: {},
   actions: {},
   modules: {
     user,
-    app
+    app,
+    theme
   }
 })

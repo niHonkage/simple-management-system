@@ -1,6 +1,6 @@
 <script setup>
 import { User, Lock } from '@element-plus/icons-vue'
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { useStore } from 'vuex'
 import { ElMessage } from 'element-plus'
 import { useI18n } from 'vue-i18n'
@@ -12,17 +12,18 @@ const loginForm = ref({
 })
 
 const i18n = useI18n()
-console.log(i18n.t('msg'))
-const rules = {
+
+const rules = ref({
   username: [
-    { required: true, message: i18n.t('msg.login.usernameRule1'), trigger: 'blur' },
-    { min: 4, max: 15, message: i18n.t('msg.login.usernameRule2'), trigger: 'blur' }
+    // message属性应该是动态变化的
+    { required: true, message: computed(() => i18n.t('msg.login.usernameRule1')), trigger: 'blur' },
+    { min: 4, max: 15, message: computed(() => i18n.t('msg.login.usernameRule2')), trigger: 'blur' }
   ],
   password: [
-    { required: true, message: i18n.t('msg.login.passwordRule1'), trigger: 'blur' },
-    { min: 6, max: 15, message: i18n.t('msg.login.passwordRule2'), trigger: 'blur' }
+    { required: true, message: computed(() => i18n.t('msg.login.passwordRule1')), trigger: 'blur' },
+    { min: 6, max: 15, message: computed(() => i18n.t('msg.login.passwordRule2')), trigger: 'blur' }
   ]
-}
+})
 const loading = ref(false)
 const formRef = ref(null)
 const store = useStore()
@@ -57,14 +58,14 @@ const onLogin = () => {
           <lang-select class="lang-select"></lang-select>
         </el-form-item>
         <el-form-item prop="username">
-          <el-input placeholder="$t('msg.login.usernameRule1')" v-model="loginForm.username">
+          <el-input :placeholder="i18n.t('msg.login.usernameRule1')" v-model="loginForm.username">
             <template #prefix>
               <el-icon class="el-input__icon"><User /></el-icon>
             </template>
           </el-input>
         </el-form-item>
         <el-form-item prop="password">
-          <el-input placeholder="$t('msg.login.passwordRule1')" show-password type="password" v-model="loginForm.password">
+          <el-input :placeholder="i18n.t('msg.login.passwordRule1')" show-password type="password" v-model="loginForm.password">
             <template #prefix>
               <el-icon class="el-input__icon"><Lock /></el-icon>
             </template>
@@ -93,7 +94,7 @@ const onLogin = () => {
     font-size: 32px;
     color: #eee;
   }
-  ::v-deep .lang-select{
+  :deep(.lang-select){
     position: absolute;
     top: 4px;
     right: 0;

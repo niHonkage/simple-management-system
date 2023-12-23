@@ -45,7 +45,7 @@ const privateRoutes = [
         component: () => import('@/views/user-info/UserInfo.vue'),
         meta: {
           title: 'userInfo',
-          icon: 'userInfo'
+          icon: 'ico-user-info'
         }
       },
       {
@@ -123,7 +123,7 @@ const publicRoutes = [
         component: () => import('@/views/profile/ProfilePage.vue'),
         meta: {
           title: 'profile',
-          icon: 'el-icon-user'
+          icon: 'profile_light'
         }
       },
       // 404

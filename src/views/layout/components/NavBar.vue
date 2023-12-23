@@ -4,6 +4,8 @@ import { useStore } from 'vuex'
 import ToggleButton from './ToggleButton.vue'
 import BreadCrumb from '@/components/BreadCrumb.vue'
 import LangSelect from '@/components/LangSelect.vue'
+import ThemeSelect from '@/components/ThemeSelect.vue'
+import ScreenFull from '@/components/ScreenFull.vue'
 
 const store = useStore()
 const logout = () => {
@@ -15,7 +17,9 @@ const logout = () => {
     <toggle-button class="hamburger-container" />
     <bread-crumb class="bread-crumb"></bread-crumb>
     <div class="right-menu">
+      <screen-full class="right-menu-item hover-effect"></screen-full>
       <lang-select class="right-menu-item hover-effect"></lang-select>
+      <theme-select class="right-menu-item hover-effect"></theme-select>
       <!-- 头像 -->
       <el-dropdown class="avatar-container" trigger="click">
         <div class="avatar-wrapper">
@@ -64,7 +68,7 @@ const logout = () => {
     float: right;
     padding-right: 16px;
 
-    ::v-deep .avatar-container {
+    :deep(.avatar-container) {
       cursor: pointer;
       .avatar-wrapper {
         margin-top: 5px;
@@ -75,7 +79,7 @@ const logout = () => {
         }
       }
     }
-    ::v-deep .right-menu-item {
+    :deep(.right-menu-item) {
       display: inline-block;
       padding: 0 18px 0 0;
       font-size: 24px;

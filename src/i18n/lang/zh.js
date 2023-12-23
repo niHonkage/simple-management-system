@@ -205,5 +205,8 @@ export default {
     sheetReceivable: '今日应收',
     sheetActual: '今日实收',
     sheetBalance: '今日结余'
+  },
+  dialog: {
+    title: '提示'
   }
 }

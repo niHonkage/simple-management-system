@@ -207,5 +207,8 @@ export default {
     sheetReceivable: 'Receivables today',
     sheetActual: 'Actual today',
     sheetBalance: 'Balance today'
+  },
+  dialog: {
+    title: 'Tips'
   }
 }
