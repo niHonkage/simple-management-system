@@ -6,6 +6,7 @@ import BreadCrumb from '@/components/BreadCrumb.vue'
 import LangSelect from '@/components/LangSelect.vue'
 import ThemeSelect from '@/components/ThemeSelect.vue'
 import ScreenFull from '@/components/ScreenFull.vue'
+import HeaderSearch from '@/components/HeaderSearch.vue'
 
 const store = useStore()
 const logout = () => {
@@ -17,6 +18,7 @@ const logout = () => {
     <toggle-button class="hamburger-container" />
     <bread-crumb class="bread-crumb"></bread-crumb>
     <div class="right-menu">
+      <header-search class="right-menu-item hover-effect"></header-search>
       <screen-full class="right-menu-item hover-effect"></screen-full>
       <lang-select class="right-menu-item hover-effect"></lang-select>
       <theme-select class="right-menu-item hover-effect"></theme-select>
