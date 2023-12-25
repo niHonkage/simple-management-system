@@ -7,6 +7,7 @@ import LangSelect from '@/components/LangSelect.vue'
 import ThemeSelect from '@/components/ThemeSelect.vue'
 import ScreenFull from '@/components/ScreenFull.vue'
 import HeaderSearch from '@/components/HeaderSearch.vue'
+import GuideTool from '@/components/GuideTool.vue'
 
 const store = useStore()
 const logout = () => {
@@ -16,8 +17,9 @@ const logout = () => {
 <template>
   <div class="navbar">
     <toggle-button class="hamburger-container" />
-    <bread-crumb class="bread-crumb"></bread-crumb>
+    <bread-crumb class="bread-crumb" id="guide-breadcrumb"></bread-crumb>
     <div class="right-menu">
+      <guide-tool class="right-menu-item hover-effect"></guide-tool>
       <header-search class="right-menu-item hover-effect"></header-search>
       <screen-full class="right-menu-item hover-effect"></screen-full>
       <lang-select class="right-menu-item hover-effect"></lang-select>

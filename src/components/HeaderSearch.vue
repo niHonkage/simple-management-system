@@ -96,7 +96,7 @@ watch(isShow, (value) => {
 </script>
 <template>
   <div :class="{ show: isShow }" class="header-search" >
-    <div class="icon-wrapper" @click.stop="onShowClick">
+    <div class="icon-wrapper" @click.stop="onShowClick" id="guide-search">
       <svg-icon 
       class-name="search-icon"
       icon="search"

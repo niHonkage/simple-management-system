@@ -17,7 +17,7 @@ const handleSetTheme = command => {
     class="theme"
     @command="handleSetTheme"
   >
-    <div>
+    <div id="guide-theme">
       <el-tooltip :content="$t('msg.navBar.themeChange')">
         <svg-icon icon="change-theme" />
       </el-tooltip>

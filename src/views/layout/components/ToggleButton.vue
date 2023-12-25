@@ -1,5 +1,5 @@
 <template>
-  <div class="tog" @click="toggleClick">
+  <div class="tog" @click="toggleClick" id="guide-hamburger">
     <svg-icon class="hamburger" :icon="icon"></svg-icon>
   </div>
 </template>
@@ -26,6 +26,7 @@ const icon = computed(() =>
     vertical-align: middle;
     width: 20px;
     height: 20px;
+    z-index: 10;
   }
 }
 </style>

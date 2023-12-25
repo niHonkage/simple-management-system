@@ -7,13 +7,17 @@ import TagsView from '@/components/TagsView.vue'
 <template>
   <div class="app-wrapper" :class="[$store.getters.sidebarOpened ? 'openSidebar' : 'hideSidebar']">
     <!-- 左侧menu -->
-    <side-bar :style="{ backgroundColor: $store.getters.cssVar.menuBg }" id="guide-sidebar" class="sidebar-container"></side-bar>
+    <side-bar 
+      :style="{ backgroundColor: $store.getters.cssVar.menuBg }" 
+      id="guide-sidebar" 
+      class="sidebar-container">
+    </side-bar>
     <div class="main-container">
       <div class="fixed-header">
         <!-- 顶部的 navbar -->
         <nav-bar></nav-bar>
         <!-- tags -->
-        <tags-view></tags-view>
+        <tags-view id="guide-tags"></tags-view>
       </div>
       <app-main></app-main>
     </div>

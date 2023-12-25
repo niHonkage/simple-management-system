@@ -13,7 +13,7 @@ const onToggle = () => {
 
 </script>
 <template>
-  <div @click="onToggle">
+  <div @click="onToggle" id="guide-full">
     <svg-icon 
     :icon="isFullScreen ? 'exit-fullscreen' : 'fullscreen'"
     ></svg-icon>
