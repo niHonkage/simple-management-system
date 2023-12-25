@@ -20,8 +20,16 @@ export const generateRoutes = (routes, basepath = '/', prefixTitle = []) => {
     if (route.meta && route.meta.title && !reg.exec(route.path)) {
       const i18nTitle = i18n.global.t(`msg.route.${route.meta.title}`)
       // 解构字符串成一个个的关键字
-      data.title = [...data.title, ...i18nTitle]
+      data.title = [...data.title, i18nTitle]
       result.push(data)
+    }
+
+    // 3. 存在 children 时需要递归调用
+    if (route.children) {
+      const tempRoutes = generateRoutes(route.children, data.path, data.title)
+      if (tempRoutes.length >= 1) {
+        result.push(...tempRoutes)
+      }
     }
   }
   return result

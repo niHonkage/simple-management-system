@@ -2,6 +2,7 @@
 import NavBar from './components/NavBar.vue'
 import SideBar from './components/SideBar.vue'
 import AppMain from './components/AppMain.vue'
+import TagsView from '@/components/TagsView.vue'
 </script>
 <template>
   <div class="app-wrapper" :class="[$store.getters.sidebarOpened ? 'openSidebar' : 'hideSidebar']">
@@ -11,6 +12,8 @@ import AppMain from './components/AppMain.vue'
       <div class="fixed-header">
         <!-- 顶部的 navbar -->
         <nav-bar></nav-bar>
+        <!-- tags -->
+        <tags-view></tags-view>
       </div>
       <app-main></app-main>
     </div>

@@ -12,8 +12,8 @@
     ></sidebar-item>
   </el-sub-menu>
   <!-- 渲染 item 项 -->
-  <el-menu-item v-else :index="route.path" >
-    <menu-item :title="route.meta.title" :icon="route.meta.icon"></menu-item>
+  <el-menu-item v-else :index="route.path" :style="{ backgroundColor: $store.getters.cssVar.menuBg }">
+    <menu-item :title="route.meta.title" :icon="route.meta.icon" ></menu-item>
   </el-menu-item>
 </template>
 

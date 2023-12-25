@@ -21,7 +21,7 @@ const search = ref('')
 
 // 检索数据池，也就是侧边栏提供的导航
 const router = useRouter()
-const searchPool = computed(() => {
+let searchPool = computed(() => {
   const filterRoutes = filterRouters(router.getRoutes())
   return generateRoutes(filterRoutes)
 })
@@ -54,7 +54,7 @@ initFuse(searchPool.value)
 // 国际化处理
 watchSwitchLang(
   () => {
-    const searchPool = computed(() => {
+    searchPool = computed(() => {
       const filterRoutes = filterRouters(router.getRoutes())
       return generateRoutes(filterRoutes)
     })
