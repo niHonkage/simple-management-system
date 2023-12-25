@@ -10,6 +10,7 @@ import { computed } from 'vue'
 import zhCn from 'element-plus/dist/locale/zh-cn.mjs'
 import en from 'element-plus/dist/locale/en.mjs'
 import { generateNewStyle, writeNewStyle } from './utils/theme.js'
+import { watchSwitchLang } from './utils/i18n'
 
 const store = useStore()
 const lang = store.getters.language
@@ -18,4 +19,9 @@ const locale = computed(() => lang === 'en' ? en : zhCn)
 generateNewStyle(store.getters.mainColor)
   .then((newStyle) => writeNewStyle(newStyle))
 
+watchSwitchLang(() => {
+  if (store.getters.token) {
+    store.dispatch('user/getUserInfo')
+  }
+})
 </script>
