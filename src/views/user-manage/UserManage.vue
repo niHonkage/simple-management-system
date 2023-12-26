@@ -3,7 +3,7 @@
     <el-card class="header">
       <div>
         <el-button type="primary" @click="$router.push('/user/import')">{{ i18n.t('msg.excel.importExcel') }}</el-button>
-        <el-button type="success">{{ i18n.t('msg.excel.exportExcel') }}</el-button>
+        <el-button type="success" @click="openDialog">{{ i18n.t('msg.excel.exportExcel') }}</el-button>
       </div>
     </el-card>
     <el-card>
@@ -33,10 +33,10 @@
           </template>
         </el-table-column>
         <el-table-column :label="$t('msg.excel.action')" fixed="right" width="260" >
-          <template #default>
+          <template #default="{ row }">
             <el-button type="primary" size="mini">{{ i18n.t('msg.excel.show') }}</el-button>
             <el-button type="info" size="mini">{{ i18n.t('msg.excel.showRole') }}</el-button>
-            <el-button type="danger" size="mini">{{ i18n.t('msg.excel.remove') }}</el-button>
+            <el-button type="danger" size="mini" @click="onRemove(row)">{{ i18n.t('msg.excel.remove') }}</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -52,14 +52,17 @@
       >
       </el-pagination>
     </el-card>
+    <export-excel v-model="dialogVisible"></export-excel>
   </div>
 </template>
 
 <script setup>
 import { ref, onActivated } from 'vue'
-import { getUserManageList } from '@/api/user-manage'
+import { getUserManageList, deleteUser } from '@/api/user-manage'
 import { watchSwitchLang } from '@/utils/i18n'
 import { useI18n } from 'vue-i18n'
+import { ElMessage, ElMessageBox } from 'element-plus'
+import ExportExcel from './components/Export2Excel.vue'
 
 // 数据相关
 const tableData = ref([])
@@ -95,6 +98,28 @@ const handleCurrentChange = (currentPage) => {
 
 // 监听active
 onActivated(getListData)
+
+// 删除用户
+const onRemove = (row) => {
+  ElMessageBox.confirm(
+    i18n.t('msg.excel.dialogTitle1') +
+      row.username +
+      i18n.t('msg.excel.dialogTitle2'),
+    {
+      type: 'warning'
+    }
+  ).then(async () => {
+    await deleteUser(row._id)
+    ElMessage.success(i18n.t('msg.excel.removeSuccess'))
+    getListData()
+  })
+}
+
+// dialog相关
+const dialogVisible = ref(false)
+const openDialog = () => {
+  dialogVisible.value = true
+}
 </script>
 
 <style lang="scss" scoped>
