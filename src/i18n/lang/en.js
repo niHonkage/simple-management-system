@@ -209,6 +209,8 @@ export default {
     sheetBalance: 'Balance today'
   },
   dialog: {
-    title: 'Tips'
+    title: 'Tips',
+    limitation: 'There must be a file',
+    format: 'The file must be in. xlsx,. xls,. csv format'
   }
 }

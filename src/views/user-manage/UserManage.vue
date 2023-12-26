@@ -48,6 +48,7 @@
         :page-size="size"
         layout="total, sizes, prev, pager, next, jumper"
         :total="total"
+        :page-sizes="[2, 5, 10, 15]"
       >
       </el-pagination>
     </el-card>
@@ -55,7 +56,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, onActivated } from 'vue'
 import { getUserManageList } from '@/api/user-manage'
 import { watchSwitchLang } from '@/utils/i18n'
 import { useI18n } from 'vue-i18n'
@@ -91,6 +92,9 @@ const handleCurrentChange = (currentPage) => {
   page.value = currentPage
   getListData()
 }
+
+// 监听active
+onActivated(getListData)
 </script>
 
 <style lang="scss" scoped>

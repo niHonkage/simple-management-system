@@ -207,6 +207,8 @@ export default {
     sheetBalance: '今日结余'
   },
   dialog: {
-    title: '提示'
+    title: '提示',
+    limitation: '必须也只能有一个文件',
+    format: '文件必须是 .xlsx, .xls, .csv 格式'
   }
 }
