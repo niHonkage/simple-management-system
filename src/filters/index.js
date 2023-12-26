@@ -1,6 +1,6 @@
 import dayjs from 'dayjs'
 
-const dayFilter = (val, format = 'YYYY-MM-DD') => {
+export const dayFilter = (val, format = 'YYYY-MM-DD') => {
   if (!isNaN(val)) {
     val = parseInt(val)
   }

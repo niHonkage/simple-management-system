@@ -5,7 +5,7 @@
     @close="closed"
     width="30%"
   >
-    <el-input :placeholder="$t('msg.excel.placeholder')" v-model="excelName"></el-input>
+    <el-input :placeholder="$t('msg.excel.placeholder')" v-model="excelName" @keyup.enter="onConfirm"></el-input>
     <template #footer>
       <span class="dialog-footer">
         <el-button @click="closed">{{ $t('msg.excel.close') }}</el-button>
@@ -21,6 +21,7 @@ import { useI18n } from "vue-i18n"
 import { watchSwitchLang } from '@/utils/i18n.js'
 import { getUserManageAllList } from '@/api/user-manage.js'
 import { USER_RELATIONS } from './utils'
+import { dayFilter } from '@/filters'
 
 defineProps({
   modelValue: {
@@ -67,6 +68,9 @@ const formatJson = (headers, rows) => {
       if (headers[key] === 'role') {
         const roles = item.role
         return JSON.stringify(roles.map(role => role.title))
+      }
+      if (headers[key] === 'openTime') {
+        return dayFilter(item[headers[key]])
       }
       return item[headers[key]]
     })
