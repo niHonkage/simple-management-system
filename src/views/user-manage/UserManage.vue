@@ -34,7 +34,7 @@
         </el-table-column>
         <el-table-column :label="$t('msg.excel.action')" fixed="right" width="260" >
           <template #default="{ row }">
-            <el-button type="primary" size="mini">{{ i18n.t('msg.excel.show') }}</el-button>
+            <el-button type="primary" size="mini" @click="$router.push(`/user/info/${row._id}`)">{{ i18n.t('msg.excel.show') }}</el-button>
             <el-button type="info" size="mini">{{ i18n.t('msg.excel.showRole') }}</el-button>
             <el-button type="danger" size="mini" @click="onRemove(row)">{{ i18n.t('msg.excel.remove') }}</el-button>
           </template>

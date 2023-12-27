@@ -53,6 +53,9 @@ dependencies:
   vue-router:
     specifier: ^4.0.3
     version: 4.2.5(vue@3.3.13)
+  vue3-print-nb:
+    specifier: 0.1.4
+    version: 0.1.4
   vuex:
     specifier: ^4.0.0
     version: 4.1.0(vue@3.3.13)
@@ -10163,6 +10166,14 @@ packages:
   /vue-template-es2015-compiler@1.9.1:
     resolution: {integrity: sha512-4gDntzrifFnCEvyoO8PqyJDmguXgVPxKiIxrBKjIowvL9l+N66196+72XVYR8BBf1Uv1Fgt3bGevJ+sEmxfZzw==}
     dev: true
+
+  /vue3-print-nb@0.1.4:
+    resolution: {integrity: sha512-LExI7viEzplR6ZKQ2b+V4U0cwGYbVD4fut/XHvk3UPGlT5CcvIGs6VlwGp107aKgk6P8Pgx4rco3Rehv2lti3A==}
+    dependencies:
+      vue: 3.3.13
+    transitivePeerDependencies:
+      - typescript
+    dev: false
 
   /vue@3.3.13:
     resolution: {integrity: sha512-LDnUpQvDgsfc0u/YgtAgTMXJlJQqjkxW1PVcOnJA5cshPleULDjHi7U45pl2VJYazSSvLH8UKcid/kzH8I0a0Q==}
