@@ -35,7 +35,7 @@
         <el-table-column :label="$t('msg.excel.action')" fixed="right" width="260" >
           <template #default="{ row }">
             <el-button type="primary" size="mini" @click="$router.push(`/user/info/${row._id}`)">{{ i18n.t('msg.excel.show') }}</el-button>
-            <el-button type="info" size="mini">{{ i18n.t('msg.excel.showRole') }}</el-button>
+            <el-button type="info" size="mini" @click="openRole(row)">{{ i18n.t('msg.excel.showRole') }}</el-button>
             <el-button type="danger" size="mini" @click="onRemove(row)">{{ i18n.t('msg.excel.remove') }}</el-button>
           </template>
         </el-table-column>
@@ -53,16 +53,18 @@
       </el-pagination>
     </el-card>
     <export-excel v-model="dialogVisible"></export-excel>
+    <assign-role v-model="roleVisible" :userId="selectId" @updateRole="getListData"></assign-role>
   </div>
 </template>
 
 <script setup>
-import { ref, onActivated } from 'vue'
+import { ref, onActivated, watch } from 'vue'
 import { getUserManageList, deleteUser } from '@/api/user-manage'
 import { watchSwitchLang } from '@/utils/i18n'
 import { useI18n } from 'vue-i18n'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import ExportExcel from './components/Export2Excel.vue'
+import AssignRole from './components/AssignRole.vue'
 
 // 数据相关
 const tableData = ref([])
@@ -120,6 +122,21 @@ const dialogVisible = ref(false)
 const openDialog = () => {
   dialogVisible.value = true
 }
+
+const roleVisible = ref(false)
+const selectId = ref('')
+const openRole = (row) => {
+  roleVisible.value = true
+  selectId.value = row._id
+}
+
+// 关闭角色弹窗时终止id
+watch(
+  () => roleVisible,
+  (val) => {
+    if (!val) selectId.value = ''
+  }
+)
 </script>
 
 <style lang="scss" scoped>
