@@ -13,7 +13,19 @@ router.beforeEach(async (to, from) => {
       // 满足存在token且前往非登录页，需要判断用户信息是否被获取，
       // 如果不存在用户信息则需要获取
       if (!store.getters.hasUserInfo) {
-        await store.dispatch('user/getUserInfo')
+        // 处理用户权限
+        const { permission } = await store.dispatch('user/getUserInfo')
+        // 获取筛选后的路由
+        const filterRoutes = await store.dispatch(
+          'permission/filterRoutes',
+          permission.menus
+        )
+        // 遍历数组添加到路由表中
+        filterRoutes.forEach((route) => {
+          router.addRoute(route)
+        })
+        // 添加后需要跳转立即触发更新
+        return
       }
       return true
     }

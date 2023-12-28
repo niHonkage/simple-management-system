@@ -1,7 +1,7 @@
 import { login, getUserInfo } from '@/api/sys.js'
 import { setItem, getItem, clearItem } from '@/utils/storage.js'
 import { TOKEN } from '@/constant/index.js'
-import router from '@/router/index.js'
+import router, { resetRouter } from '@/router/index.js'
 import { setTimeStamp } from '@/utils/auth'
 // 密码加密库
 import md5 from 'md5'
@@ -49,7 +49,7 @@ export default {
       this.commit('user/setToken', '')
       this.commit('user/setUserInfo', null)
       clearItem()
-      // TODO:清理权限相关数据
+      resetRouter()
       router.push('/login')
     }
   }

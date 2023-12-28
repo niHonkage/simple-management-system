@@ -5,6 +5,7 @@ import theme from './modules/theme.js'
 import { generateColors } from '@/utils/theme.js'
 import { getItem } from '@/utils/storage.js'
 import { MAIN_COLOR } from '@/constant/index.js'
+import permission from './modules/permission.js'
 
 export default createStore({
   state: {},
@@ -28,6 +29,7 @@ export default createStore({
   modules: {
     user,
     app,
-    theme
+    theme,
+    permission
   }
 })

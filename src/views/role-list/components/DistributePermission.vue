@@ -1,6 +1,6 @@
 <template>
   <el-dialog
-    :title="$nextTick('msg.excel.roleDialogTitle')"
+    :title="$t('msg.excel.roleDialogTitle')"
     :model-value="modelValue"
     @close="closed"
   >
@@ -14,15 +14,18 @@
       :props="defaultProps"
     >
     </el-tree>
+
     <template #footer>
       <span class="dialog-footer">
         <el-button @click="closed">{{ $t('msg.universal.cancel') }}</el-button>
-        <el-button @click="onConfirm" type="primary">{{ $t('msg.universal.confirm') }}</el-button>
+        <el-button type="primary" @click="onConfirm">{{
+          $t('msg.universal.confirm')
+        }}</el-button>
       </span>
     </template>
   </el-dialog>
 </template>
-  
+
 <script setup>
 import { defineProps, defineEmits, ref, watch } from 'vue'
 import { rolePermission, distributePermission } from '@/api/role.js'
@@ -38,7 +41,7 @@ const defaultProps = {
 
 const props = defineProps({
   modelValue: {
-    tyep: Boolean,
+    type: Boolean,
     required: true
   },
   roleId: {
@@ -51,12 +54,13 @@ const props = defineProps({
 const allPermission = ref([])
 const getPermissionList = async () => {
   allPermission.value = await permissionList()
+  console.log(allPermission.value)
 }
 getPermissionList()
 watchSwitchLang(getPermissionList)
 
 // 获取单个角色的权限数据
-const treeRef = ref(null)
+const treeRef = ref()
 const getRolePermission = async () => {
   console.log(props.roleId)
   const checkedKeys = await rolePermission(props.roleId)
@@ -65,6 +69,7 @@ const getRolePermission = async () => {
 watch(
   () => props.roleId,
   (val) => {
+    console.log(val)
     if (val) getRolePermission()
   }
 )
@@ -86,7 +91,5 @@ const closed = () => {
   emit('update:modelValue', false)
 }
 </script>
-  
-<style>
-  
-</style>
+
+<style></style>

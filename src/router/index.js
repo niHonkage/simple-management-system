@@ -1,8 +1,22 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import layout from '@/views/layout/LayoutPage.vue'
+import ArticleCreaterRouter from './modules/ArticleCreate'
+import ArticleRouter from './modules/Article'
+import PermissionListRouter from './modules/PermissionList'
+import RoleListRouter from './modules/RoleList'
+import UserManageRouter from './modules/UserManage'
+import store from '@/store'
+
+export const asyncRoutes = [
+  RoleListRouter,
+  UserManageRouter,
+  PermissionListRouter,
+  ArticleCreaterRouter,
+  ArticleRouter
+]
 
 // 私有路由表
-const privateRoutes = [
+export const privateRoutes = [
   {
     path: '/user',
     component: layout,
@@ -107,7 +121,7 @@ const privateRoutes = [
 ]
 
 // 公开路由表
-const publicRoutes = [
+export const publicRoutes = [
   {
     path: '/login',
     component: () => import('@/views/login/LoginPage.vue')
@@ -145,7 +159,21 @@ const publicRoutes = [
 
 const router = createRouter({
   history: createWebHashHistory(),
-  routes: [...publicRoutes, ...privateRoutes]
+  routes: publicRoutes
 })
+
+//  重置路由
+export const resetRouter = () => {
+  if (
+    store.getters.userInfo &&
+    store.getters.userInfo.permission &&
+    store.getters.userInfo.permission.menus
+  ) {
+    const menus = store.getters.userInfo.permission.menus
+    menus.forEach((route) => {
+      router.removeRoute(route)
+    })
+  }
+}
 
 export default router
