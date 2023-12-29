@@ -31,6 +31,9 @@ module.exports = {
         target: 'https://api.imooc-admin.lgdsunday.club/',
         changeOrigin: true // 是否跨域
       }
+    },
+    client: {
+      overlay: false
     }
   },
   configureWebpack: {
