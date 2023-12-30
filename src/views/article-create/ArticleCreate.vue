@@ -46,8 +46,8 @@ const onSuccess = () => {
 const route = useRoute()
 const articleId = route.params.id
 const detail = ref({})
-const getArticleData = () => {
-  detail.value = articleDetail(articleId)
+const getArticleData = async () => {
+  detail.value = await articleDetail(articleId)
   title.value = detail.value.title
 }
 if (articleId) {

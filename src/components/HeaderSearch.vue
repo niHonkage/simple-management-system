@@ -52,15 +52,13 @@ const initFuse = (searchPool) => {
 initFuse(searchPool.value)
 
 // 国际化处理
-watchSwitchLang(
-  () => {
-    searchPool = computed(() => {
-      const filterRoutes = filterRouters(router.getRoutes())
-      return generateRoutes(filterRoutes)
-    })
-    initFuse(searchPool.value)
-  }
-)
+watchSwitchLang(() => {
+  searchPool = computed(() => {
+    const filterRoutes = filterRouters(router.getRoutes())
+    return generateRoutes(filterRoutes)
+  })
+  initFuse(searchPool.value)
+})
 
 // 搜索方法
 const querySearch = (query) => {
@@ -95,12 +93,9 @@ watch(isShow, (value) => {
 })
 </script>
 <template>
-  <div :class="{ show: isShow }" class="header-search" >
+  <div :class="{ show: isShow }" class="header-search">
     <div class="icon-wrapper" @click.stop="onShowClick" id="guide-search">
-      <svg-icon 
-      class-name="search-icon"
-      icon="search"
-    />
+      <svg-icon class-name="search-icon" icon="search" />
     </div>
     <el-select
       ref="searchSelectRef"
@@ -125,7 +120,7 @@ watch(isShow, (value) => {
 <style lang="scss" scoped>
 .header-search {
   font-size: 0 !important;
-  .icon-wrapper{
+  .icon-wrapper {
     display: inline-block;
     width: fit-content;
     height: fit-content;
